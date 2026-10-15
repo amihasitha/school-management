@@ -18,8 +18,8 @@
                 <div class="flex items-center gap-3">
                     <img src="{{ asset('images/st-johns-logo.jpg') }}" alt="St. John's College Crest" class="h-10 w-auto">
                     <span class="font-semibold text-[#0F5C33] dark:text-[#4ADE80] leading-tight">
-                        St. John's College<br class="hidden sm:block">
-                        <span class="text-xs font-normal text-[#3f6650] dark:text-[#8fc9a3]">Nugegoda</span>
+                        {{ __('St. John\'s College') }}<br class="hidden sm:block">
+                        <span class="text-xs font-normal text-[#3f6650] dark:text-[#8fc9a3]">{{ __('Nugegoda') }}</span>
                     </span>
                 </div>
 
@@ -30,14 +30,14 @@
                                 href="{{ url('/dashboard') }}"
                                 class="inline-block px-5 py-1.5 bg-[#0F5C33] hover:bg-[#0c4a29] text-white rounded-md text-sm leading-normal transition"
                             >
-                                Dashboard
+                                {{ __('Dashboard') }}
                             </a>
                         @else
                             <a
                                 href="{{ route('login') }}"
                                 class="inline-block px-5 py-1.5 border border-[#0F5C33]/30 hover:border-[#0F5C33] text-[#0F5C33] dark:text-[#4ADE80] dark:border-[#4ADE80]/30 dark:hover:border-[#4ADE80] rounded-md text-sm leading-normal transition"
                             >
-                                Log in
+                                {{ __('Log in') }}
                             </a>
 
                             @if (Route::has('register'))
@@ -45,7 +45,7 @@
                                     href="{{ route('register') }}"
                                     class="inline-block px-5 py-1.5 bg-[#0F5C33] hover:bg-[#0c4a29] text-white rounded-md text-sm leading-normal transition"
                                 >
-                                    Register
+                                    {{ __('Register') }}
                                 </a>
                             @endif
                         @endauth
@@ -59,36 +59,36 @@
 
                 <div class="flex-1 p-8 lg:p-14 bg-white dark:bg-[#101a12] dark:text-[#EDEDEC]">
                     <span class="inline-block text-xs font-semibold tracking-wider uppercase text-[#0F5C33] dark:text-[#4ADE80] mb-3">
-                        Data Management System
+                        {{ __('Data Management System') }}
                     </span>
 
                     <h1 class="text-2xl lg:text-3xl font-bold leading-tight mb-4 text-[#12331f] dark:text-white">
-                        St. John's College<br>Data Management System
+                        {{ __('St. John\'s College') }}<br>{{ __('Data Management System') }}
                     </h1>
 
                     <p class="text-[#4b5f52] dark:text-[#A1A09A] leading-relaxed mb-6">
-                        A centralized platform for managing student records, subject marks, class rankings,
-                        and teacher profiles &mdash; built to support the academic administration of
-                        St. John's College, Nugegoda.
+                        {{ __('A centralized platform for managing student records, subject marks, class rankings,
+                        and teacher profiles — built to support the academic administration of
+                        St. John\'s College, Nugegoda.') }}
                     </p>
 
                     <ul class="flex flex-col gap-3 mb-8 text-sm text-[#33473a] dark:text-[#c7d9cd]">
                         <li class="flex items-center gap-3">
                             <span class="flex items-center justify-center w-5 h-5 rounded-full bg-[#0F5C33]/10 text-[#0F5C33] dark:bg-[#4ADE80]/15 dark:text-[#4ADE80] text-xs">&#10003;</span>
-                            Import subject marks in bulk via CSV
+                            {{ __('Import subject marks in bulk via CSV') }}
                         </li>
                         <li class="flex items-center gap-3">
                             <span class="flex items-center justify-center w-5 h-5 rounded-full bg-[#0F5C33]/10 text-[#0F5C33] dark:bg-[#4ADE80]/15 dark:text-[#4ADE80] text-xs">&#10003;</span>
-                            Automatic median calculation and class ranking
+                            {{ __('Automatic median calculation and class ranking') }}
                         </li>
                         <li class="flex items-center gap-3">
                             <span class="flex items-center justify-center w-5 h-5 rounded-full bg-[#0F5C33]/10 text-[#0F5C33] dark:bg-[#4ADE80]/15 dark:text-[#4ADE80] text-xs">&#10003;</span>
-                            Teacher and student profile management
+                            {{ __('Teacher and student profile management') }}
                         </li>
                     </ul>
 
                     <p class="text-xs text-[#6b7d70] dark:text-[#7a8f7f]">
-                        v{{ app()->version() }} &middot; &ldquo;Nil Desperandum&rdquo;
+                        v{{ app()->version() }} {{ __('· “Nil Desperandum“') }}
                     </p>
                 </div>
 
@@ -103,7 +103,7 @@
         </div>
 
         <footer class="mt-6 text-xs text-[#6b7d70] dark:text-[#7a8f7f]">
-            &copy; {{ date('Y') }} St. John's College, Nugegoda. All rights reserved.
+            &copy; {{ date('Y') }} {{ __('St. John\'s College, Nugegoda. All rights reserved.') }}
         </footer>
     </body>
 </html>
