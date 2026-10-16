@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ config('app.name', "St. John's College Data Management System") }}</title>
+        <title>{{ config('app.name', "St. John's College - Data Management System") }}</title>
 
         @fonts
 
