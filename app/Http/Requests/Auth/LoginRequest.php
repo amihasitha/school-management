@@ -3,32 +3,35 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Auth\Events\Lockout;
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 class LoginRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
+    /** Which users-table column each user type signs in with. */
+    private const IDENTIFIER = [
+        'super_admin' => 'email',
+        'teacher' => 'nic',
+        'student' => 'index_number',
+    ];
+
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
+            'user_type' => ['required', Rule::in(array_keys(self::IDENTIFIER))],
+            // Only the identifier for the chosen type is required.
+            'email' => ['required_if:user_type,super_admin', 'nullable', 'string', 'email'],
+            'nic' => ['required_if:user_type,teacher', 'nullable', 'string'],
+            'index_number' => ['required_if:user_type,student', 'nullable', 'string'],
             'password' => ['required', 'string'],
         ];
     }
@@ -42,11 +45,21 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        $type = $this->string('user_type')->toString();
+        $field = self::IDENTIFIER[$type];
+
+        $credentials = [
+            $field => $this->string($field)->toString(),
+            'user_type' => $type, // the account must really be of the selected type
+            'password' => $this->input('password'),
+        ];
+
+        if (! Auth::attempt($credentials, $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
+            // Show the error under the field the user actually sees.
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                $field => trans('auth.failed'),
             ]);
         }
 
@@ -54,8 +67,6 @@ class LoginRequest extends FormRequest
     }
 
     /**
-     * Ensure the login request is not rate limited.
-     *
      * @throws ValidationException
      */
     public function ensureIsNotRateLimited(): void
@@ -67,20 +78,21 @@ class LoginRequest extends FormRequest
         event(new Lockout($this));
 
         $seconds = RateLimiter::availableIn($this->throttleKey());
+        $field = self::IDENTIFIER[$this->string('user_type')->toString()] ?? 'user_type';
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
+            $field => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),
         ]);
     }
 
-    /**
-     * Get the rate limiting throttle key for the request.
-     */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
+        $type = $this->string('user_type')->toString();
+        $identifier = $this->string(self::IDENTIFIER[$type] ?? 'email')->toString();
+
+        return Str::transliterate(Str::lower($type.'|'.$identifier).'|'.$this->ip());
     }
 }
