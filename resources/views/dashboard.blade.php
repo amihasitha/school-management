@@ -12,6 +12,33 @@
                     {{ __("You're logged in!") }}
                 </div>
             </div>
+        @if (auth()->user()->user_type === 'super_admin')
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-l">
+                <a href="{{ route('teachers.index') }}"
+                class="inline-flex items-center px-4 py-2
+                        bg-[#0F5C33] border border-transparent
+                        rounded-md font-semibold text-xs text-white
+                        uppercase tracking-widest
+                        hover:bg-green-800 focus:outline-none
+                        focus:ring-2 focus:ring-green-500
+                        focus:ring-offset-2 transition">
+                        {{ __('View All Teachers') }}                        
+                </a>
+            </div>
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-l">
+                <a href="{{ route('students.index') }}"
+                class="inline-flex items-center px-4 py-2
+                        bg-[#0F5C33] border border-transparent
+                        rounded-md font-semibold text-xs text-white
+                        uppercase tracking-widest
+                        hover:bg-green-800 focus:outline-none
+                        focus:ring-2 focus:ring-green-500
+                        focus:ring-offset-2 transition">
+                        {{ __('View All Students') }}                        
+                </a>
+            </div>
+        @endif
         </div>
     </div>
+
 </x-app-layout>
