@@ -32,7 +32,6 @@
                                 <th class="px-4 py-3 text-left text-sm">{{ __('Name') }}</th>
                                 <th class="px-4 py-3 text-left text-sm">{{ __('Email') }}</th>
                                 <th class="px-4 py-3 text-left text-sm">{{ __('NIC Number') }}</th>
-                                <th class="px-4 py-3 text-left text-sm">{{ __('Index Number') }}</th>
                                 <th class="px-4 py-3 text-left text-sm">{{ __('Registered Date') }}</th>
                             </tr>
                         </thead>
@@ -54,9 +53,6 @@
                                     </td>
                                     <td class="px-4 py-3 text-sm">
                                         {{ $user->nic ?? '-' }}
-                                    </td>
-                                    <td class="px-4 py-3 text-sm">
-                                        {{ $user->index_number ?? '-' }}
                                     </td>
                                     <td class="px-4 py-3 text-sm">
                                         {{ $user->created_at?->format('Y-m-d') ?? '-' }}

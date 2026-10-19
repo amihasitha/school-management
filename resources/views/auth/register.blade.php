@@ -36,11 +36,22 @@
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                 </div>
 
-                <!-- Email (Super Admin only) -->
-                <template x-if="type === 'super_admin'">
+                <!-- Email (Super Admin required, Teacher optional) -->
+                <template x-if="type === 'super_admin' || type === 'teacher'">
                     <div class="mt-4">
                         <x-input-label for="email" :value="__('Email')" />
-                        <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="Your Email"/>
+
+                        <x-text-input
+                            id="email"
+                            class="block mt-1 w-full"
+                            type="email"
+                            name="email"
+                            :value="old('email')"
+                            x-bind:required="type === 'super_admin'"
+                            autocomplete="username"
+                            placeholder="Your Email"
+                        />
+
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
                 </template>
