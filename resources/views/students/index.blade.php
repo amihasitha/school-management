@@ -1,16 +1,12 @@
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Registered Students') }}
         </h2>
     </x-slot>
-
     <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 p-10">
             <div class="bg-white shadow-sm sm:rounded-lg p-6">
-
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="text-lg font-semibold text-[#0F5C33]">
                         {{ __('All Students') }}
@@ -30,8 +26,6 @@
                                 <th class="px-4 py-3 text-left text-sm">{{ __('#') }}</th>
                                 <th class="px-4 py-3 text-left text-sm">{{ __('User') }} Type</th>
                                 <th class="px-4 py-3 text-left text-sm">{{ __('Name') }}</th>
-                                <th class="px-4 py-3 text-left text-sm">{{ __('Email') }}</th>
-                                <th class="px-4 py-3 text-left text-sm">{{ __('NIC Number') }}</th>
                                 <th class="px-4 py-3 text-left text-sm">{{ __('Index Number') }}</th>
                                 <th class="px-4 py-3 text-left text-sm">{{ __('Registered Date') }}</th>
                             </tr>
@@ -48,12 +42,6 @@
                                     </td>
                                     <td class="px-4 py-3 text-sm">
                                         {{ $user->name }}
-                                    </td>
-                                    <td class="px-4 py-3 text-sm">
-                                        {{ $user->email ?? '-' }}
-                                    </td>
-                                    <td class="px-4 py-3 text-sm">
-                                        {{ $user->nic ?? '-' }}
                                     </td>
                                     <td class="px-4 py-3 text-sm">
                                         {{ $user->index_number ?? '-' }}
@@ -77,7 +65,6 @@
                 <div class="mt-6">
                     {{ $users->links() }}
                 </div>
-
             </div>
         </div>
     </div>

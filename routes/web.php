@@ -23,6 +23,15 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/teachers', [TeachersController::class, 'index'])
         ->name('teachers.index');
+
+    Route::get('/teachers/{user}/edit', [TeachersController::class, 'edit'])
+        ->name('teachers.edit');
+
+    Route::put('/teachers/{user}', [TeachersController::class, 'update'])
+        ->name('teachers.update');
+
+    Route::delete('/teachers/{user}', [TeachersController::class, 'destroy'])
+        ->name('teachers.destroy');    
 });
 
 Route::middleware('auth')->group(function () {
