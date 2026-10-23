@@ -54,10 +54,64 @@
 
         <template x-if="type">
             <div>
-                <!-- Password -->
-                <div class="mt-4">
+                <!-- Password with Show/Hide Eye Icon -->
+                <div class="mt-4" x-data="{ showPassword: false }">
                     <x-input-label for="password" :value="__('Password')" />
-                    <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" placeholder="Your Password"/>
+
+                    <div class="relative mt-1">
+                        <input
+                            id="password"
+                            class="block w-full rounded-md border-gray-300 pe-10 shadow-sm
+                                focus:border-[#0F5C33] focus:ring-[#0F5C33]
+                                dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300"
+                            x-bind:type="showPassword ? 'text' : 'password'"
+                            name="password"
+                            required
+                            autocomplete="current-password"
+                            placeholder="Your Password"
+                        />
+
+                        <button
+                            type="button"
+                            x-on:click="showPassword = !showPassword"
+                            class="absolute inset-y-0 right-0 flex items-center px-3
+                                text-gray-500 hover:text-[#0F5C33]
+                                focus:outline-none" style="right:0px; top: 10px;"
+                            x-bind:aria-label="showPassword ? 'Hide password' : 'Show password'"
+                            x-bind:title="showPassword ? 'Hide password' : 'Show password'"
+                        >
+                            <!-- Eye icon -->
+                            <svg
+                                x-show="!showPassword"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.7"
+                                stroke="currentColor"
+                                class="h-5 w-5"
+                                aria-hidden="true"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M2.25 12s3.5-7 9.75-7 9.75 7 9.75 7-3.5 7-9.75 7-9.75-7-9.75-7Z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+
+                            <!-- Eye-off icon -->
+                            <svg
+                                x-show="showPassword"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.7"
+                                stroke="currentColor"
+                                class="h-5 w-5"
+                                aria-hidden="true"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 5.2A10.7 10.7 0 0 1 12 5c6.25 0 9.75 7 9.75 7a15.6 15.6 0 0 1-3.1 3.9M6.2 6.2C3.6 8 2.25 12 2.25 12s3.5 7 9.75 7c1.3 0 2.5-.3 3.6-.8" />
+                            </svg>
+                        </button>
+                    </div>
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                 </div>
 
