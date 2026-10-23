@@ -4,30 +4,25 @@
             {{ __('Registered Students') }}
         </h2>
     </x-slot>
-    <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 p-10">
-            <div class="bg-white shadow-sm sm:rounded-lg p-6">
+    <div class="flex min-h-screen bg-gray-100">
+        {{-- Left Navigation Panel --}}
+        @include('profile.partials.sidebar-navigation')
+
+        <main class="min-w-0 flex-1 p-6 sm:p-8">
+            <div class="bg-white shadow-sm sm:rounded-lg p-6">                
                 <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-lg font-semibold text-[#0F5C33]">
+                    <h3 class="text-lg font-medium text-gray-900">
                         {{ __('All Students') }}
                     </h3>
-
-                    <a href="{{ route('dashboard') }}"
-                       class="px-4 py-2 bg-gray-200 rounded-md
-                              text-sm hover:bg-gray-300">
-                        {{ __('Back to Profile') }}
-                    </a>
                 </div>
-
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-[#0F5C33] text-white">
                             <tr>
-                                <th class="px-4 py-3 text-left text-sm">{{ __('#') }}</th>
-                                <th class="px-4 py-3 text-left text-sm">{{ __('User') }} Type</th>
-                                <th class="px-4 py-3 text-left text-sm">{{ __('Name') }}</th>
-                                <th class="px-4 py-3 text-left text-sm">{{ __('Index Number') }}</th>
-                                <th class="px-4 py-3 text-left text-sm">{{ __('Registered Date') }}</th>
+                                <th class="px-4 py-3 text-left text-sm p-2">{{ __('#') }}</th>
+                                <th class="px-4 py-3 text-left text-sm p-2">{{ __('Name') }}</th>
+                                <th class="px-4 py-3 text-left text-sm p-2">{{ __('Index Number') }}</th>
+                                <th class="px-4 py-3 text-left text-sm p-2">{{ __('Registered Date') }}</th>
                             </tr>
                         </thead>
 
@@ -38,16 +33,13 @@
                                         {{ $users->firstItem() + $loop->index }}
                                     </td>
                                     <td class="px-4 py-3 text-sm">
-                                        {{ ucfirst(str_replace('_', ' ', $user->user_type)) }}
-                                    </td>
-                                    <td class="px-4 py-3 text-sm">
                                         {{ $user->name }}
                                     </td>
                                     <td class="px-4 py-3 text-sm">
                                         {{ $user->index_number ?? '-' }}
                                     </td>
                                     <td class="px-4 py-3 text-sm">
-                                        {{ $user->created_at?->format('Y-m-d') ?? '-' }}
+                                        {{ $user->created_at?->format('Y-M-d') ?? '-' }}
                                     </td>
                                 </tr>
                             @empty
@@ -66,6 +58,6 @@
                     {{ $users->links() }}
                 </div>
             </div>
-        </div>
+        </main>
     </div>
 </x-app-layout>

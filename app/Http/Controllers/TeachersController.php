@@ -61,23 +61,6 @@ class TeachersController extends Controller
             });
         }
 
-        // Filter by registration date.
-        if ($request->filled('date_from')) {
-            $query->whereDate(
-                'created_at',
-                '>=',
-                $request->input('date_from')
-            );
-        }
-
-        if ($request->filled('date_to')) {
-            $query->whereDate(
-                'created_at',
-                '<=',
-                $request->input('date_to')
-            );
-        }
-
         $users = $query->latest()
             ->paginate(15)
             ->withQueryString();

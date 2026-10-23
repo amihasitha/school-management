@@ -4,10 +4,17 @@
             {{ __('Edit Teacher') }}
         </h2>
     </x-slot>
-    <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 p-10">
-            <div class="bg-white p-6 shadow-sm sm:rounded-lg">
+    <div class="flex min-h-screen bg-gray-100">
+        {{-- Left Navigation Panel --}}
+        @include('profile.partials.sidebar-navigation')
 
+        <main class="min-w-0 flex-1 p-6 sm:p-8">
+            <div class="bg-white p-6 shadow-sm sm:rounded-lg">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-lg font-medium text-gray-900">
+                        {{ __('Edit Teacher Details') }}
+                    </h3>
+                </div>
                 @if ($errors->any())
                     <div class="mb-4 rounded-md bg-red-100 p-4 text-red-700">
                         <ul class="list-disc pl-5">
@@ -63,6 +70,6 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </main>
     </div>
 </x-app-layout>

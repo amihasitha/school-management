@@ -1,3 +1,4 @@
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -5,39 +6,34 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
+    <div class="flex min-h-screen bg-gray-100">
+        {{-- Left Navigation Panel --}}
+        @include('profile.partials.sidebar-navigation')
+
+        {{-- Dashboard Content --}}
+        <main class="min-w-0 flex-1 p-6 sm:p-8">
+
+            <div class="mb-6">
+                <h1 class="text-2xl font-bold text-gray-800">
+                    {{ __('Welcome, ') }}{{ auth()->user()->name }}!
+                </h1>
+                <p class="mt-1 text-gray-600">
+                    {{ __('Welcome to the St. John\'s College Data Management System.') }}
+                </p>
+            </div>
+
+            <div class="rounded-lg bg-white p-6 shadow-sm">
+                <p class="text-gray-900">
                     {{ __("You're logged in!") }}
-                </div>
+                </p>
+                <p class="mt-2 text-gray-900">
+                    {{ __('Name : ') }}{{ auth()->user()->name }}
+                </p>
+                <p class="mt-2 text-gray-900">
+                    {{ __('Email : ') }}{{ auth()->user()->email ?? 'N/A' }}
+                </p>    
             </div>
-        @if (auth()->user()->user_type === 'super_admin')
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-l">
-                <a href="{{ route('teachers.index') }}"
-                class="inline-flex items-center px-4 py-2
-                        bg-[#0F5C33] border border-transparent
-                        rounded-md font-semibold text-xs text-white
-                        uppercase tracking-widest
-                        hover:bg-green-800 focus:outline-none
-                        focus:ring-2 focus:ring-green-500
-                        focus:ring-offset-2 transition">
-                        {{ __('View All Teachers') }}                        
-                </a>
-            </div>
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-l">
-                <a href="{{ route('students.index') }}"
-                class="inline-flex items-center px-4 py-2
-                        bg-[#0F5C33] border border-transparent
-                        rounded-md font-semibold text-xs text-white
-                        uppercase tracking-widest
-                        hover:bg-green-800 focus:outline-none
-                        focus:ring-2 focus:ring-green-500
-                        focus:ring-offset-2 transition">
-                        {{ __('View All Students') }}                        
-                </a>
-            </div>
-        @endif
-        </div>
+
+        </main>
     </div>
 </x-app-layout>

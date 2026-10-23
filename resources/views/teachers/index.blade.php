@@ -4,162 +4,131 @@
             {{ __('Registered Teachers') }}
         </h2>
     </x-slot>
+    <div class="flex min-h-screen bg-gray-100">
+        {{-- Left Navigation Panel --}}
+        @include('profile.partials.sidebar-navigation')
 
-    <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 p-10">
+        <main class="min-w-0 flex-1 p-6 sm:p-8">
+            
             <div class="bg-white shadow-sm sm:rounded-lg p-6">
                 <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-lg font-semibold text-[#0F5C33]">
+                    <h3 class="text-lg font-medium text-gray-900">
                         {{ __('All Teachers') }}
                     </h3>
-                    <a href="{{ route('dashboard') }}"
-                       class="px-4 py-2 bg-gray-200 rounded-md
-                              text-sm hover:bg-gray-300">
-                        {{ __('Back to Profile') }}
-                    </a>
                 </div>
 
-    <!-- Search & Filter Accordion -->
-    <div x-data="{ open: {{ request()->hasAny(['search', 'email_status', 'date_from', 'date_to']) ? 'true' : 'false' }} }"
-        class="mb-6 overflow-hidden rounded-lg border border-gray-200">
+                <!-- Search & Filter Accordion -->
+                <div x-data="{ open: {{ request()->hasAny(['search', 'email_status', 'date_from', 'date_to']) ? 'true' : 'false' }} }"
+                    class="mb-6 overflow-hidden rounded-lg border border-gray-200">
 
-        <!-- Accordion Header -->
-        <button type="button"
-                @click="open = !open"
-                :aria-expanded="open.toString()"
-                aria-controls="teacher-filters"
-                class="flex w-full items-center justify-between bg-gray-50 px-5 py-4 text-left hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#0F5C33]">
+                        <!-- Accordion Header -->
+                        <button type="button"
+                                @click="open = !open"
+                                :aria-expanded="open.toString()"
+                                aria-controls="teacher-filters"
+                                class="flex w-full items-center justify-between bg-gray-50 px-5 py-4 text-left hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#0F5C33]">
 
-            <span class="flex items-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 text-[#0F5C33]"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2">
-                    <path stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2l-6 7v6l-4 2v-8L3 6V4z" />
-                </svg>
+                            <span class="flex items-center gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-5 w-5 text-[#0F5C33]"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2">
+                                    <path stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2l-6 7v6l-4 2v-8L3 6V4z" />
+                                </svg>
 
-                <span class="font-semibold text-gray-800">
-                    {{ __('Search & Filter Teachers') }}
-                </span>
+                                <span class="font-semibold text-gray-800">
+                                    {{ __('Search & Filter Teachers') }}
+                                </span>
 
-                @if (request()->hasAny(['search', 'email_status', 'date_from', 'date_to']))
-                    <span class="rounded-full bg-[#0F5C33] px-2 py-1 text-xs font-medium text-white">
-                        {{ __('Filters Applied') }}
-                    </span>
-                @endif
-            </span>
+                                @if (request()->hasAny(['search', 'email_status', 'date_from', 'date_to']))
+                                    <span class="rounded-full bg-[#0F5C33] px-2 py-1 text-xs font-medium text-white">
+                                        {{ __('Filters Applied') }}
+                                    </span>
+                                @endif
+                            </span>
 
-            <svg xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 text-gray-500 transition-transform duration-200"
-                :class="{ 'rotate-180': open }"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2">
-                <path stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19 9l-7 7-7-7" />
-            </svg>
-        </button>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5 text-gray-500 transition-transform duration-200"
+                                :class="{ 'rotate-180': open }"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="2">
+                                <path stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
 
-        <!-- Accordion Content -->
-        <div id="teacher-filters"
-            x-show="open"
-            x-transition
-            x-cloak
-            class="border-t border-gray-200 bg-white p-5">
+                    <!-- Accordion Content -->
+                    <div id="teacher-filters"
+                        x-show="open"
+                        x-transition
+                        x-cloak
+                        class="border-t border-gray-200 bg-white p-4">
 
-            <form method="GET"
-                action="{{ route('teachers.index') }}"
-                class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+                        <form method="GET"
+                            action="{{ route('teachers.index') }}"
+                            class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
 
-                <!-- Search -->
-                <div>
-                    <label for="search"
-                        class="block text-sm font-medium text-gray-700">
-                        {{ __('Search') }}
-                    </label>
+                            <!-- Search -->
+                            <div>
+                                <label for="search"
+                                    class="block text-sm font-medium text-gray-700 pt-2">
+                                    {{ __('Search') }}
+                                </label>
 
-                    <input id="search"
-                        name="search"
-                        type="text"
-                        value="{{ request('search') }}"
-                        placeholder="{{ __('Name, email, or NIC') }}"
-                        class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-[#0F5C33] focus:ring-[#0F5C33]">
+                                <input id="search"
+                                    name="search"
+                                    type="text"
+                                    value="{{ request('search') }}"
+                                    placeholder="{{ __('Name, email, or NIC') }}"
+                                    class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-[#0F5C33] focus:ring-[#0F5C33]">
+                            </div>
+
+                            <!-- Email Status -->
+                            <div>
+                                <label for="email_status"
+                                    class="block text-sm font-medium text-gray-700 pt-2">
+                                    {{ __('Email Status') }}
+                                </label>
+
+                                <select id="email_status"
+                                        name="email_status"
+                                        class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-[#0F5C33] focus:ring-[#0F5C33]">
+                                    <option value="">{{ __('All Teachers') }}</option>
+
+                                    <option value="with_email"
+                                        @selected(request('email_status') === 'with_email')>
+                                        {{ __('With Email') }}
+                                    </option>
+
+                                    <option value="without_email"
+                                        @selected(request('email_status') === 'without_email')>
+                                        {{ __('Without Email') }}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="flex flex-wrap gap-3 md:col-span-2 lg:col-span-4 pt-4">
+                                <button type="submit"
+                                        class="rounded-md bg-[#0F5C33] px-5 py-2 text-sm font-medium text-white hover:bg-green-800">
+                                    {{ __('Search / Filter') }}
+                                </button>
+
+                                <a href="{{ route('teachers.index') }}"
+                                class="rounded-md bg-gray-200 px-5 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300">
+                                    {{ __('Reset') }}
+                                </a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-
-                <!-- Email Status -->
-                <div>
-                    <label for="email_status"
-                        class="block text-sm font-medium text-gray-700">
-                        {{ __('Email Status') }}
-                    </label>
-
-                    <select id="email_status"
-                            name="email_status"
-                            class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-[#0F5C33] focus:ring-[#0F5C33]">
-                        <option value="">{{ __('All Teachers') }}</option>
-
-                        <option value="with_email"
-                            @selected(request('email_status') === 'with_email')>
-                            {{ __('With Email') }}
-                        </option>
-
-                        <option value="without_email"
-                            @selected(request('email_status') === 'without_email')>
-                            {{ __('Without Email') }}
-                        </option>
-                    </select>
-                </div>
-
-                <!-- Registration Date From -->
-                <div>
-                    <label for="date_from"
-                        class="block text-sm font-medium text-gray-700">
-                        {{ __('Registered From') }}
-                    </label>
-
-                    <input id="date_from"
-                        name="date_from"
-                        type="date"
-                        value="{{ request('date_from') }}"
-                        class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-[#0F5C33] focus:ring-[#0F5C33]">
-                </div>
-
-                <!-- Registration Date To -->
-                <div>
-                    <label for="date_to"
-                        class="block text-sm font-medium text-gray-700">
-                        {{ __('Registered To') }}
-                    </label>
-
-                    <input id="date_to"
-                        name="date_to"
-                        type="date"
-                        value="{{ request('date_to') }}"
-                        min="{{ request('date_from') }}"
-                        class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-[#0F5C33] focus:ring-[#0F5C33]">
-                </div>
-
-                <!-- Buttons -->
-                <div class="flex flex-wrap gap-3 md:col-span-2 lg:col-span-4">
-                    <button type="submit"
-                            class="rounded-md bg-[#0F5C33] px-5 py-2 text-sm font-medium text-white hover:bg-green-800">
-                        {{ __('Search / Filter') }}
-                    </button>
-
-                    <a href="{{ route('teachers.index') }}"
-                    class="rounded-md bg-gray-200 px-5 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300">
-                        {{ __('Reset') }}
-                    </a>
-                </div>
-            </form>
-        </div>
-    </div>
 
                 <!-- Success Message -->
                 @if (session('success'))
@@ -173,13 +142,12 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-[#0F5C33] text-white">
                             <tr>
-                                <th class="px-4 py-3 text-left text-sm">{{ __('#') }}</th>
-                                <th class="px-4 py-3 text-left text-sm">{{ __('User') }} Type</th>
-                                <th class="px-4 py-3 text-left text-sm">{{ __('Name') }}</th>
-                                <th class="px-4 py-3 text-left text-sm">{{ __('Email') }}</th>
-                                <th class="px-4 py-3 text-left text-sm">{{ __('NIC Number') }}</th>
-                                <th class="px-4 py-3 text-left text-sm">{{ __('Registered Date') }}</th>
-                                <th class="px-4 py-3 text-left text-sm">{{ __('Actions') }}</th>
+                                <th class="px-4 py-3 text-left text-sm p-2">{{ __('#') }}</th>
+                                <th class="px-4 py-3 text-left text-sm p-2">{{ __('Name') }}</th>
+                                <th class="px-4 py-3 text-left text-sm p-2">{{ __('Email') }}</th>
+                                <th class="px-4 py-3 text-left text-sm p-2">{{ __('NIC Number') }}</th>
+                                <th class="px-4 py-3 text-left text-sm p-2">{{ __('Registered Date') }}</th>
+                                <th class="px-4 py-3 text-left text-sm p-2">{{ __('Actions') }}</th>
                             </tr>
                         </thead>
 
@@ -188,9 +156,6 @@
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-4 py-3 text-sm">
                                         {{ $users->firstItem() + $loop->index }}
-                                    </td>
-                                    <td class="px-4 py-3 text-sm">
-                                        {{ ucfirst(str_replace('_', ' ', $user->user_type)) }}
                                     </td>
                                     <td class="px-4 py-3 text-sm">
                                         {{ $user->name }}
@@ -202,7 +167,7 @@
                                         {{ $user->nic ?? '-' }}
                                     </td>
                                     <td class="px-4 py-3 text-sm">
-                                        {{ $user->created_at?->format('Y-m-d') ?? '-' }}
+                                        {{ $user->created_at?->format('Y-M-d') ?? '-' }}
                                     </td>
                                     <td class="px-4 py-3 text-sm">
                                         <!-- Edit -->
@@ -240,6 +205,6 @@
                     {{ $users->links() }}
                 </div>
             </div>
-        </div>
+        </main>
     </div>
 </x-app-layout>
