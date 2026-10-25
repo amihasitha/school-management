@@ -31,7 +31,13 @@ Route::middleware('auth')->group(function () {
         ->name('teachers.update');
 
     Route::delete('/teachers/{user}', [TeachersController::class, 'destroy'])
-        ->name('teachers.destroy');    
+        ->name('teachers.destroy');
+
+    Route::get('/teachers/create', [TeachersController::class, 'create'])
+    ->name('teachers.create');
+
+    Route::post('/teachers', [TeachersController::class, 'store'])
+        ->name('teachers.store');    
 });
 
 Route::middleware('auth')->group(function () {

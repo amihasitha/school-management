@@ -133,4 +133,50 @@ class TeachersController extends Controller
             ->route('teachers.index')
             ->with('success', 'Teacher account deleted successfully.');
     }
+
+    // Display the Add Teacher form
+    public function create()
+    {
+        abort_unless(
+            auth()->user()->user_type === 'super_admin',
+            403
+        );
+
+        return view('teachers.create');
+    }
+
+    // Save a new teacher
+    public function store(Request $request)
+    {
+        abort_unless(
+            auth()->user()->user_type === 'super_admin',
+            403
+        );
+
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'nic' => ['required', 'string', 'max:20', 'unique:users,nic'],
+            'email' => [
+                'nullable',
+                'email',
+                'max:255',
+                Rule::unique('users', 'email'),
+            ],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        User::create([
+            'name' => $validated['name'],
+            'user_type' => 'teacher',
+            'nic' => $validated['nic'],
+            'email' => filled($validated['email'] ?? null)
+                ? $validated['email']
+                : null,
+            'password' => Hash::make($validated['password']),
+        ]);
+
+        return redirect()
+            ->route('teachers.index')
+            ->with('success', 'Teacher account created successfully.');
+    }
 }
