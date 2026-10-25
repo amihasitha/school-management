@@ -31,7 +31,7 @@
             <div>
                 <!-- Name (all types) -->
                 <div class="mt-4">
-                    <x-input-label for="name" :value="__('Name')" />
+                    <x-input-label for="name" :value="__(' Full Name')" />
                     <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autocomplete="name" placeholder="Your Name"/>
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                 </div>

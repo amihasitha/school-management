@@ -32,7 +32,7 @@
                     <div class="mb-4">
                         <label for="name"
                                class="block text-sm font-medium text-gray-700">
-                            {{ __('Name') }}
+                            {{ __('Full Name') }}
                         </label>
                         <input id="name" name="name" type="text"
                                value="{{ old('name', $user->name) }}"

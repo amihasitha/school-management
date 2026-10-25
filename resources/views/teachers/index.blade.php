@@ -15,6 +15,16 @@
                     <h3 class="text-lg font-medium text-gray-900">
                         {{ __('All Teachers') }}
                     </h3>
+
+                    <a href="{{ route('teachers.create') }}"
+                        class="inline-flex items-center justify-center gap-2 rounded-md
+                            bg-[#0F5C33] px-5 py-2.5 text-sm font-semibold text-white
+                            shadow-sm transition hover:bg-green-800
+                            focus:outline-none focus:ring-2 focus:ring-[#0F5C33]
+                            focus:ring-offset-2">
+                        <span class="text-lg p-2">+</span>
+                        {{ __('Add New Teacher') }}
+                    </a>
                 </div>
 
                 <!-- Search & Filter Accordion -->
@@ -44,7 +54,7 @@
                                     {{ __('Search & Filter Teachers') }}
                                 </span>
 
-                                @if (request()->hasAny(['search', 'email_status', 'date_from', 'date_to']))
+                                @if (request()->hasAny(['search', 'email_status']))
                                     <span class="rounded-full bg-[#0F5C33] px-2 py-1 text-xs font-medium text-white">
                                         {{ __('Filters Applied') }}
                                     </span>
@@ -133,7 +143,7 @@
                 <!-- Success Message -->
                 @if (session('success'))
                     <div role="status"
-                        class="mb-4 rounded-md border border-green-200 bg-green-100 p-3 text-green-800">
+                        class="mb-4 rounded-md border border-green-200 bg-green-100 p-3 text-green-800 p-4">
                         {{ session('success') }}
                     </div>
                 @endif
@@ -172,7 +182,7 @@
                                     <td class="px-4 py-3 text-sm">
                                         <!-- Edit -->
                                         <a href="{{ route('teachers.edit', $user) }}"
-                                        class="inline-block rounded-md bg-blue-600 px-3 py-2 text-black hover:bg-blue-700">
+                                        class="inline-block rounded-md bg-blue-600 px-3 py-2 text-black hover:bg-blue-700 font-semibold">
                                             {{ __('Edit') }}
                                         </a>
 
