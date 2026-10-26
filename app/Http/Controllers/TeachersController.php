@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Hash;;
+use Illuminate\Support\Facades\Hash;
+use App\Exports\TeachersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TeachersController extends Controller
 {
@@ -193,5 +195,23 @@ class TeachersController extends Controller
         return redirect()
             ->route('teachers.index')
             ->with('success', 'Teacher account created successfully.');
+    }
+
+    public function export(Request $request)
+    {
+        abort_unless(
+            auth()->user()->user_type === 'super_admin',
+            403
+        );
+
+        $filters = $request->only([
+            'search',
+            'email_status',
+        ]);
+
+        return Excel::download(
+            new TeachersExport($filters),
+            'registered_teachers_' . now()->format('Y-m-d_H-i-s') . '.xlsx'
+        );
     }
 }

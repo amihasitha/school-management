@@ -38,6 +38,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/teachers', [TeachersController::class, 'store'])
         ->name('teachers.store');    
+
+    Route::get('/teachers/export', [TeachersController::class, 'export'])
+        ->name('teachers.export');    
 });
 
 Route::middleware('auth')->group(function () {
