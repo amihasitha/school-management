@@ -19,13 +19,19 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => [
-                'required',
+                'required_if:user_type,super_admin',
                 'string',
                 'lowercase',
                 'email',
                 'max:255',
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],
+            'nic' => ['nullable', 'string'],
+            'first_appointment_date' => ['nullable', 'date'],
+            'dob' => ['nullable', 'date'],
+            'address' => ['nullable', 'string'],
+            'date_current_appointment_school' => ['nullable', 'date'],
+            'appointment_subject' => ['nullable', 'string']
         ];
     }
 }
