@@ -19,6 +19,13 @@ return new class extends Migration
             $table->string('index_number', 10)->nullable()->unique();
             $table->string('email')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('address')->nullable();
+            $table->date('dob')->nullable();
+            $table->date('first_appointment_date')->nullable();
+            $table->date('date_current_appointment_school')->nullable();
+            $table->string('appointment_subject', 50)->nullable();
+            $table->string('emergency_contact_number', 15)->nullable();
+            $table->string('emergency_contact_name')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
