@@ -48,7 +48,7 @@
                                value="{{ old('email', $user->email) }}"
                                class="mt-1 w-full rounded-md border-gray-300 shadow-sm">
                     </div>
-                    <div class="mb-6">
+                    <div class="mb-4">
                         <label for="nic"
                                class="block text-sm font-medium text-gray-700">
                             {{ __('NIC Number') }}
@@ -58,6 +58,51 @@
                                required
                                class="mt-1 w-full rounded-md border-gray-300 shadow-sm">
                     </div>
+                    <div class="mb-4">
+                        <label for="dob"
+                               class="block text-sm font-medium text-gray-700">
+                            {{ __('Date of Birth') }}
+                        </label>
+                        <input id="dob" name="dob" type="date"
+                               value="{{ old('dob', $user->dob) }}"
+                               class="mt-1 rounded-md border-gray-300 shadow-sm">
+                    </div>
+                    <div class="mb-4">
+                        <label for="address"
+                               class="block text-sm font-medium text-gray-700">
+                            {{ __('Address') }}
+                        </label>
+                        <input id="address" name="address" type="text"
+                                value="{{ old('address', $user->address) }}"
+                                class="mt-1 w-full rounded-md border-gray-300 shadow-sm">
+                    </div>
+                    <div class="mb-4">
+                        <label for="first_appointment_date"
+                               class="block text-sm font-medium text-gray-700">
+                            {{ __('First Appointment Date') }}
+                        </label>
+                        <input id="first_appointment_date" name="first_appointment_date" type="date"
+                               value="{{ old('first_appointment_date', $user->first_appointment_date) }}"
+                               class="mt-1 rounded-md border-gray-300 shadow-sm">
+                    </div>
+                    <div class="mb-4">
+                        <label for="date_current_appointment_school"
+                               class="block text-sm font-medium text-gray-700">
+                            {{ __('Current School Appointment Date') }}
+                        </label>
+                        <input id="date_current_appointment_school" name="date_current_appointment_school" type="date"
+                               value="{{ old('date_current_appointment_school', $user->date_current_appointment_school) }}"
+                               class="mt-1 rounded-md border-gray-300 shadow-sm">
+                    </div>   
+                    <div class="mb-4">
+                        <label for="appointment_subject"
+                               class="block text-sm font-medium text-gray-700">
+                            {{ __('Subject of Appointment') }}
+                        </label>
+                        <input id="appointment_subject" name="appointment_subject" type="text"
+                                value="{{ old('appointment_subject', $user->appointment_subject) }}"
+                                class="mt-1 w-full rounded-md border-gray-300 shadow-sm">
+                    </div>                                                         
                     <div class="flex justify-end gap-3">
                         <a href="{{ route('teachers.index') }}"
                            class="rounded-md bg-gray-200 px-4 py-2 hover:bg-gray-300">

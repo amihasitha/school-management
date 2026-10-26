@@ -156,14 +156,18 @@
                                 <th class="px-4 py-3 text-left text-sm p-2">{{ __('Name') }}</th>
                                 <th class="px-4 py-3 text-left text-sm p-2">{{ __('Email') }}</th>
                                 <th class="px-4 py-3 text-left text-sm p-2">{{ __('NIC Number') }}</th>
-                                <th class="px-4 py-3 text-left text-sm p-2">{{ __('Registered Date') }}</th>
+                                <th class="px-4 py-3 text-left text-sm p-2">{{ __('Date Of Birth') }}</th>
+                                <th class="px-4 py-3 text-left text-sm p-2">{{ __('Address') }}</th>
+                                <th class="px-4 py-3 text-left text-sm p-2">{{ __('First Appointment Date') }}</th>
+                                <th class="px-4 py-3 text-left text-sm p-2">{{ __('Current School Appointment Date') }}</th>
+                                <th class="px-4 py-3 text-left text-sm p-2">{{ __('Subject of Appointment') }}</th>
                                 <th class="px-4 py-3 text-left text-sm p-2">{{ __('Actions') }}</th>
                             </tr>
                         </thead>
 
                         <tbody class="divide-y divide-gray-200">
                             @forelse ($users as $user)
-                                <tr class="hover:bg-gray-50">
+                                <tr class="{{ $loop->odd ? 'bg-white' : 'bg-green-50' }} hover:bg-green-100 transition-colors duration-150">
                                     <td class="px-4 py-3 text-sm">
                                         {{ $users->firstItem() + $loop->index }}
                                     </td>
@@ -177,7 +181,19 @@
                                         {{ $user->nic ?? '-' }}
                                     </td>
                                     <td class="px-4 py-3 text-sm">
-                                        {{ $user->created_at?->format('Y-M-d') ?? '-' }}
+                                        {{ $user->dob ? \Carbon\Carbon::parse($user->dob)->format('Y-M-d') : '-' }}
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">
+                                        {{ $user->address }}
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">
+                                        {{ $user->first_appointment_date ? \Carbon\Carbon::parse($user->first_appointment_date)->format('Y-M-d') : '-' }}
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">
+                                        {{ $user->date_current_appointment_school ? \Carbon\Carbon::parse($user->date_current_appointment_school)->format('Y-M-d') : '-' }}
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">
+                                        {{ $user->appointment_subject }}
                                     </td>
                                     <td class="px-4 py-3 text-sm">
                                         <!-- Edit -->
@@ -185,6 +201,7 @@
                                         class="inline-block rounded-md bg-blue-600 px-3 py-2 text-black hover:bg-blue-700 font-semibold">
                                             {{ __('Edit') }}
                                         </a>
+                                        <!-- End Edit -->
 
                                         <!-- Delete -->
                                         <form action="{{ route('teachers.destroy', $user) }}"
@@ -198,6 +215,7 @@
                                                 {{ __('Delete') }}
                                             </button>
                                         </form>
+                                        <!-- End Delete -->
                                     </td>
                                 </tr>
                             @empty

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Hash;;
 
 class TeachersController extends Controller
 {
@@ -36,7 +37,11 @@ class TeachersController extends Controller
             'email',
             'nic',
             'index_number',
-            'created_at'
+            'dob',
+            'address',
+            'first_appointment_date',
+            'date_current_appointment_school',
+            'appointment_subject'
         )->where('user_type', 'teacher');
 
         // Search by name, email, or NIC.
@@ -61,7 +66,7 @@ class TeachersController extends Controller
             });
         }
 
-        $users = $query->latest()
+        $users = $query->oldest()
             ->paginate(15)
             ->withQueryString();
 
@@ -100,6 +105,11 @@ class TeachersController extends Controller
             ],
 
             'nic' => ['required', 'string', 'max:50'],
+            'dob' => ['nullable', 'date'],
+            'address' => ['nullable', 'string'],
+            'first_appointment_date' => ['nullable', 'date'],
+            'date_current_appointment_school' => ['nullable', 'date'],
+            'appointment_subject' => ['nullable', 'string'],
         ]);
 
         // Normalize an empty email field to NULL.
@@ -108,6 +118,11 @@ class TeachersController extends Controller
         $user->name = $validated['name'];
         $user->email = $validated['email'];
         $user->nic = $validated['nic'];
+        $user->dob = $validated['dob'];
+        $user->address = $validated['address'];
+        $user->first_appointment_date = $validated['first_appointment_date'];
+        $user->date_current_appointment_school = $validated['date_current_appointment_school'];
+        $user->appointment_subject = $validated['appointment_subject'];
         $user->save();
 
         return redirect()
