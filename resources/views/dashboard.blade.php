@@ -13,16 +13,10 @@
         {{-- Dashboard Content --}}
         <main class="min-w-0 flex-1 p-6 sm:p-8">
 
-            <div class="mb-6">
+            <div class="rounded-lg bg-white p-6 shadow-sm">
                 <h1 class="text-2xl font-bold text-gray-800">
                     {{ __('Welcome, ') }}{{ auth()->user()->name }}!
                 </h1>
-                <p class="mt-1 text-gray-600">
-                    {{ __('Welcome to the St. John\'s College Data Management System.') }}
-                </p>
-            </div>
-
-            <div class="rounded-lg bg-white p-6 shadow-sm">
                 <p class="text-gray-900">
                     {{ __("You're logged in!") }}
                 </p>

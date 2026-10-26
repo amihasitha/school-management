@@ -20,9 +20,10 @@
 
             <!-- Page Heading -->
             @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+                <header class="bg-white shadow" style="background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8" style="height: 153px; text-align: center;">                        
+                        <h3 class="text-lg font-bold" style="font-size: 30px;">{{ __('St. John\'s College, Nugegoda') }}</h3>
+                        <p class="mt-1 text-sm text-green-100" style="font-size: 15px;">{{ __('Data Management System') }}</p>
                     </div>
                 </header>
             @endisset

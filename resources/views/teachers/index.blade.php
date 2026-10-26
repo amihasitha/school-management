@@ -189,7 +189,7 @@
 
                         <tbody class="divide-y divide-gray-200">
                             @forelse ($users as $user)
-                                <tr class="{{ $loop->odd ? 'bg-white' : 'bg-green-50' }} hover:bg-green-100 transition-colors duration-150">
+                                <tr class="{{ $loop->odd ? 'bg-white' : 'bg-gray-100' }} hover:bg-green-100 transition-colors duration-150">
                                     <td class="px-4 py-3 text-sm">
                                         {{ $users->firstItem() + $loop->index }}
                                     </td>
@@ -217,7 +217,7 @@
                                     <td class="px-4 py-3 text-sm">
                                         {{ $user->appointment_subject }}
                                     </td>
-                                    <td class="px-4 py-3 text-sm">
+                                    <td class="px-4 py-3 text-sm p-4">
                                         <!-- Edit -->
                                         <a href="{{ route('teachers.edit', $user) }}"
                                         class="inline-block rounded-md bg-blue-600 px-3 py-2 text-black hover:bg-blue-700 font-semibold">
