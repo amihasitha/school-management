@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('appointment_subject', 50)->nullable();
             $table->string('emergency_contact_number', 15)->nullable();
             $table->string('emergency_contact_name')->nullable();
+            $table->string('class')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

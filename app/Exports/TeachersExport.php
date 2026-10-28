@@ -74,6 +74,7 @@ class TeachersExport implements FromQuery, WithHeadings, WithMapping, ShouldAuto
             'First Appointment Date',
             'Current School Appointment Date',
             'Subject of Appointment',
+            'Class'
         ];
     }
 
@@ -95,6 +96,7 @@ class TeachersExport implements FromQuery, WithHeadings, WithMapping, ShouldAuto
                 ? \Carbon\Carbon::parse($user->date_current_appointment_school)->format('Y-M-d')
                 : '',
             $user->appointment_subject ?? '',
+            $user->class ?? '',
         ];
     }
 }

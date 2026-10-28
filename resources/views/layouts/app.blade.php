@@ -7,6 +7,8 @@
 
         <title>{{ config('app.name', "St. John's College - Data Management System") }}</title>
 
+        <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -20,10 +22,10 @@
 
             <!-- Page Heading -->
             @isset($header)
-                <header class="bg-white shadow" style="background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));">
+                <header class="bg-white shadow" style="background-color: #0F5C33;">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8" style="height: 153px; text-align: center;">                        
-                        <h3 class="text-lg font-bold" style="font-size: 30px;">{{ __('St. John\'s College, Nugegoda') }}</h3>
-                        <p class="mt-1 text-sm text-green-100" style="font-size: 15px;">{{ __('Data Management System') }}</p>
+                        <h3 class="text-lg font-bold text-white" style="font-size: 30px;">{{ __('St. John\'s College, Nugegoda') }}</h3>
+                        <p class="mt-1 text-sm text-green-100 text-white" style="font-size: 15px;">{{ __('Data Management System') }}</p>
                     </div>
                 </header>
             @endisset

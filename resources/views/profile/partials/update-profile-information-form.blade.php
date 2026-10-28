@@ -147,7 +147,7 @@
             <div>
                 <x-input-label
                     for="appointment_subject"
-                    :value="__('Subject of Appointment')"
+                    :value="__('Appointed Subject')"
                 />
 
                 <x-text-input
@@ -164,7 +164,29 @@
                     :messages="$errors->get('appointment_subject')"
                 />
             </div>
-        </template>    
+        </template> 
+        <template x-if="type === 'teacher' || type === 'student'">
+            <div>
+                <x-input-label
+                    for="class"
+                    :value="__('Class')"
+                />
+
+                <x-text-input
+                    id="class"
+                    name="class"
+                    type="text"
+                    class="mt-1 block w-full"
+                    :value="old('class', $user->class)"
+                    autocomplete="off"
+                />
+
+                <x-input-error
+                    class="mt-2"
+                    :messages="$errors->get('class')"
+                />
+            </div>
+        </template>            
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>

@@ -48,6 +48,18 @@
             </a>
 
         @endif
+
+            <p class="px-4 pt-5 pb-2 text-xs uppercase
+                        tracking-wider text-green-200 p-2">
+                {{ __('Import Data') }}
+            </p>
+            <a href="{{ route('teachers.import') }}"
+                class="flex items-center gap-3 rounded-md px-4 py-3
+                hover:bg-white/10 transition
+                {{ request()->routeIs('teachers.import') ? 'bg-white/20 font-semibold' : '' }}">
+                <span>📥</span>
+                <span>{{ __('Import Teachers') }}</span>
+            </a>
         <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit"

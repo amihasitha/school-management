@@ -97,12 +97,21 @@
                     <div class="mb-4">
                         <label for="appointment_subject"
                                class="block text-sm font-medium text-gray-700">
-                            {{ __('Subject of Appointment') }}
+                            {{ __('Appointed Subject') }}
                         </label>
                         <input id="appointment_subject" name="appointment_subject" type="text"
                                 value="{{ old('appointment_subject', $user->appointment_subject) }}"
                                 class="mt-1 w-full rounded-md border-gray-300 shadow-sm">
-                    </div>                                                         
+                    </div>  
+                    <div class="mb-4">
+                        <label for="class"
+                               class="block text-sm font-medium text-gray-700">
+                            {{ __('Class') }}
+                        </label>
+                        <input id="class" name="class" type="text"
+                                value="{{ old('class', $user->class) }}"
+                                class="mt-1 w-full rounded-md border-gray-300 shadow-sm">
+                    </div>                                                       
                     <div class="flex justify-end gap-3">
                         <a href="{{ route('teachers.index') }}"
                            class="rounded-md bg-gray-200 px-4 py-2 hover:bg-gray-300">
